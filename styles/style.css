@@ -1,0 +1,357 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    font-family: Arial;
+    text-decoration: none;
+}
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4vw;
+  height: max-content;
+  position: sticky;
+  top: 3vh;
+  box-shadow: 0px 2px 2px rgba(42, 6, 6, 0.1);
+  background-color:rgb(255, 255, 255);
+  font-size: larger;
+}
+.navbar .logo img{
+    width: 20vw;
+}
+
+.navbar nav ul li{
+    display: inline-block;
+    margin-left: 5px;
+    width: max-content;
+    padding: 5px 12px;
+    border-radius: 30px;
+}
+.navbar nav ul li a{
+    color: black;
+}
+.navbar nav ul li a:hover{
+    color: red;
+}
+
+/* -------------------------- */
+
+.banner-container{
+    background-image: url('../images/banner1.jpg');
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    color: aliceblue;
+}
+.banner-container .banner-text{
+    position: absolute;
+    width: 50vw;
+    font-size: 25px;
+    margin-top: 15vh;
+    margin-left: 15vw;
+}
+/* -------------------------- */
+.aboutus{
+    margin: 10vh 4vw ;
+}
+.aboutus .aboutus-row{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: large;
+}
+.aboutus .aboutus-row .col2 {
+    width: 40%;
+    text-align: left;
+}
+.col2 p{
+    line-height: 6vh;
+}
+.aboutus-row img{
+    width: 120%;
+}
+
+
+/* -------------------------- */
+.brands{
+    margin: 10vh 4vw ;
+}
+.header{
+    width: 100%;
+    font-size: 50px;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 8vh;
+}
+.brands  .barnd-row{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.brands  .barnd-row .brand-box{
+    width: 20%;
+}
+.barnd-row .brand-box img{
+    width: 100%;
+}
+
+/* -------------------------- */
+.feedback{
+    margin: 10vh 4vw ;
+}
+.feedback-row{
+    padding: 5vh 4vw;
+    background-color: red; 
+}
+
+.feedback-row .feedback-box{
+    padding: 3vh 10vw;
+    background-color: rgb(255, 255, 255); 
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    
+}
+.feedback-box img{
+    width: 5%;
+}
+/* -------------------------- */
+
+.contact{
+    margin: 10vh 4vw ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.contact .contact-form{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.contact .contact-form input, .contact .contact-form textarea{
+    width: 100%;
+    padding: 5px 10px;
+}
+.home-btn{
+    margin: 0.5vh;
+    border: none;
+    padding: 10px;
+    border-radius: 30px;
+    color: black;
+    font-weight: 600;
+    
+}
+.home-btn:hover{
+    background-color: rgb(227, 62, 62);
+    color: aliceblue;
+}
+/* -------------------------- */
+.footer{
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.678);
+    color: aliceblue;
+}
+.footer .footer-row{
+    padding: 4vh 4vw;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.footer .footer-row .fHeader{
+    font-size: large;
+    margin-bottom: 30px;
+}
+
+
+/* ----------log-reg---------------- */
+.logReg-container{
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logReg-container .col2{
+    width: 50%;
+    height: 100%;
+}
+.logReg-container .col2 .logReg-form{
+    padding: 10vh 10vw;
+    width: 100%;
+
+}
+.logReg-form input,.logReg-form button{
+    width: 100%;
+    padding: 5px 10px;
+    margin-bottom: 3vh;
+}
+.logReg-form p{
+    font-size: small;
+}
+
+/* ----------shop--------------- */
+.shop-container{
+    margin: 5vh 4vw ;
+}
+.shop-container .row-container{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+.row-container .box {
+    box-shadow: 0px 2px 2px rgba(42, 6, 6, 0.1);
+    padding: 5px;
+    cursor: pointer;
+    width: 18%;
+}
+
+.row-container .box p{
+    font-size: 12px ;
+    margin-bottom: 2px;
+}
+.row-container .box h4{
+    margin: 1vh;
+}
+.row-container .box img{
+    width: 120px;
+    height: 150px;
+}
+
+.box-btn-raw{
+    margin:3vh 0.5vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    color: rgb(40, 46, 170);
+}
+.cartWishlist-btn{
+    padding: 10px;
+    border-radius: 50%; 
+    font-size: 15px;
+    border: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    
+}
+.row-container .box .cartWishlist-btn:hover{
+    scale: 1.2;
+    color: red;
+}
+.row-container .box img:hover{
+    scale:1.05;
+}
+
+/* ----------product--------------- */
+.product-container{
+    margin: 5vh 4vw ;
+    display: flex;
+}
+.product-container .col2{
+    width: 50%;
+    padding: 3vh 4vh;
+}
+.product-container .col2 .main-img-box{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+.product-container .col2 .main-img-box img{
+    padding: 10px;
+    width: 60%;
+    box-shadow: 0px 2px 2px rgba(42, 6, 6, 0.1);;
+}
+.product-container .col2 .other-imgs{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.product-container .col2 .other-imgs img{
+    padding: 10px;
+    width: 25%;
+    box-shadow: 0px 2px 2px rgba(42, 6, 6, 0.1);
+
+}
+.product-container .col2 .price{
+    margin: 3vh 0;
+    
+}
+/* ----------Payment--------------- */
+.payment-container{
+    margin: 5vh 4vw ;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.payment-row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.payment-row table{
+    text-align: center;
+    font-size: small;
+
+}
+.payment-row table tr{
+    box-shadow: 0px 2px 2px rgba(42, 6, 6, 0.1);
+    height: 15vh;
+}
+.payment-row table tr td{
+    width:20%;
+}
+.payment-row img{
+    width: 30%;
+}
+.payment-container form{
+    width: 80%;
+    margin-top: 4vh;
+    
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.payment-container form fieldset{
+    padding: 20px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.payment-container form input{
+    width: 50%;
+    padding: 5px 10px;
+    margin: 0.5%;
+}
+/* ----------profile-------- */
+.order-container .order-row{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.order-container .order-row table{
+    width: 100%;
+}
+
+.order-container .order-row table th{
+    width: 100/7%;
+}
+.order-row table tr{
+    box-shadow: 0px 2px 2px rgba(42, 6, 6, 0.1);
+    height: 17vh;
+}
+
