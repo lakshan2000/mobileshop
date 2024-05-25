@@ -28,7 +28,7 @@
 
     <div class="payment-container">
         <div class="header">Your Cart</div>
-        <div class="payment-row">
+        <div class="payment-row cart-row">
             <table>
                 <tr>
                     <th>Item</th>
@@ -85,16 +85,16 @@
                     <td></td>
                     <td>
                         <form>
-                            <input style="width: 100%;margin-left: 15%;" type="button" value="Check Out" class="home-btn" onclick="alert('Product Added to Cart')">
+                            <input style="width: 100%;margin-left: 15%;" type="button" value="Check Out" class="home-btn" onclick="document.getElementById('payment-form').style.display='block'">
                         </form>
                     </td>
                 </tr>
             </table>
         </div>
 
-        <form action="">
+        <form id="payment-form" action="">
             <fieldset>
-             <legend><b>Address Details</b></legend>
+             <legend><b>Payments Details</b></legend>
              <div class="header" style="font-size: 20px;">Total Pay : Rs. 546,000.00</div>
              <input type="text" name="fullName" placeholder="Full Name">
              <input type="text" name="address1" placeholder="Address Line 01">
@@ -102,23 +102,32 @@
              <input type="text" name="address3" placeholder="Address Line 03">
              <input type="text" name="zip" placeholder="Zip Code">
              <input type="text" name="mobile" placeholder="Mobile Number">
-             <div style="width: 100%;margin-bottom: 2vh;">
-                 <input style="width: 10%;" type="radio" id="onlinePay" name="paymentMethode" value="Online Payment">
+             <div style="width: 100%;margin: 2vh 0;">
+                 <input style="width: 10%;" type="radio" id="onlinePay" name="paymentMethode" value="Online Payment" onclick="document.getElementById('card-details').style.display='block'">
                  <label for="html">Online Pay</label>
-                 <input style="width: 10%;" type="radio" id="cashOnDelvery" name="paymentMethode" value="cashOnDelvery">
+                 <input style="width: 10%;" type="radio" id="cashOnDelvery" name="paymentMethode" value="cashOnDelvery" onclick="document.getElementById('card-details').style.display='none'">
                  <label for="cashOnDelvery">Cash On Delvery</label>
              </div>
-             <input  class="home-btn" type="button" value="Place Order" onclick="alert('Order Placed Successfully')"> <!-- if methode = online ->Continue: cod -> placed Order -->
-         </fieldset>
-         <fieldset id="cardDetails">
-             <legend><b>Card Details</b></legend>
-             <input type="text" name="cardNumber" placeholder="xxxx xxxx xxxx xxxx">
-             <input type="text" name="expiryDate" placeholder="MM/YY">
-             <input type="text" name="CVC" placeholder="CVC">
-             <input class="home-btn" type="button" value="Place Order" onclick="alert('Oreder Placed!!!')">
+
+             <div class="card-details" id="card-details">
+                <input type="text" name="cardNumber" placeholder="xxxx xxxx xxxx xxxx">
+                <input type="text" name="expiryDate" placeholder="MM/YY">
+                <input type="text" name="CVC" placeholder="CVC">
+             </div>
+             <br>
+             <input  class="home-btn" type="button" value="Place Order" onclick="alert('Order Placed Successfully')"> 
          </fieldset>
          </form>
+
+
+
+         <div class="empty-box">
+            <h1>Cart Is Empty !!!</h1>
+        </div>
     </div>
+
+
+
 
 
 

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MobileHub | Admin - Dashboard</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <script src="https://kit.fontawesome.com/ac1e60548d.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <img src="../images/logo.png">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="admindahsbord.html">Admin</a></li>
+                <li><a href="../homepage.html">Home</a></li>
+                <li><a href="../shop.html">Shop</a></li>                
+                <li><a href="../wishlist.html" title="Wish_list"><i class="fa-solid fa-heart"></i></i></a></li>
+                <li><a href="../cart.html" title="Cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <li><a href="../profile.html" title="Profile"><i class="fa-solid fa-user"></i></a></li>
+                <li><a href="../homepage.html" title="Log Out"><i class="fa-solid fa-arrow-right-from-bracket"></i></i></a></li>
+                <!-- <li><a href="login.html">Login</a></li>
+                <li><a href="register.html">Register</a></li> -->
+            </ul>
+        </nav> 
+    </div>
+
+    <div class="payment-container" >
+        <div class="header" style="margin-bottom: 0;">Admin Page</div>
+        <form  action="">
+            <fieldset>
+                <legend><b>Admin Options</b></legend>
+                <input class="home-btn" type="button" name="Products" value="Products" onclick="window.location.href='adminProducts.html'">
+                <input class="home-btn" type="button" name="Orders" value="Orders"  onclick="window.location.href='adminOrders.html'">
+                <input class="home-btn" type="button" name="Messages" value="Messages" onclick="window.location.href='adminMessage.html'">
+                <input class="home-btn" type="button" name="Admin&Users" value="Admin & Users" onclick="window.location.href='adminUser.html'">
+                
+            </fieldset>
+    </div>
+
+
+    <div class="footer" id="footer">
+        <div class="footer-row">
+            <div class="col4">
+                <div class="fHeader">Address</div>
+                <p>A11/301</p>
+                <p>Wattala Road,Ja Ela</p>
+                <p>Colombo 05</p>
+            </div>
+            <div class="col4">
+                <div class="fHeader">Open Hours</div>
+                <p>Mon - Fri - 08:00 to 20.00</p>
+                <p>Sat - 08:00 to 22.00</p>
+                <p>Sun - 08:00 to 18.00</p>
+            </div>
+            <div class="col4">
+                <div class="fHeader">Social Media</div>
+                <p>Facebook</p>
+                <p>Twitter</p>
+                <p>Instragram</p>
+            </div>
+        </div>
+    </div>   
+</body>
+</html>
