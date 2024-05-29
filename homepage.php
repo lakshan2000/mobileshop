@@ -1,3 +1,38 @@
+<?php
+include_once 'database/connection.php';
+
+if(isset($_SESSION['userId'])){
+    $userId = $_SESSION['userId'];
+    $sql = "SELECT * FROM users WHERE id='$userId'";
+    $users = mysqli_query($connect, $sql);
+    
+
+    if(mysqli_num_rows($users) > 0) {
+        $user = mysqli_fetch_assoc($users);
+
+        $firstName = $user['firstName'];
+        $lastName = $user['lastName'];
+        $email = $user['email'];
+        $mobile = $user['mobile'];
+        $addressLine1 = $user['addressLine1'];
+        $addressLine2 = $user['addressLine2'];
+        $addressLine3 = $user['addressLine3'];
+
+    } else {
+        echo "Please login the system";
+    }
+
+
+    if(isset($_GET['logout'])){
+        session_destroy();
+        header("Location: homepage.php");
+        exit(); 
+    }
+
+
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +40,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MobileHub | Homepage</title>
     <link rel="stylesheet" href="styles/style.css">
+    <script src="https://kit.fontawesome.com/ac1e60548d.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
     <div class="navbar">
@@ -13,13 +50,24 @@
         </div>
         <nav>
             <ul>
-                <li><a href="admin/admindahsbord.html">Admin</a></li>
-                <li><a href="homepage.html">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
+                <li><a href="admin/admindahsbord.php">Admin</a></li>
+                <li><a href="homepage.php">Home</a></li>
+                <li><a href="shop.php">Shop</a></li>
                 <li><a href="#aboutus">About</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="register.html">Register</a></li>
+                <?php
+                if(isset($_SESSION['userId'])){?>
+                    <li><a href="wishlist.php" title="Wish_list"><i class="fa-solid fa-heart"></i></a></li>
+                    <li><a href="cart.php" title="Cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                    <li><a href="profile.php" title="Profile"><i class="fa-solid fa-user"></i></a></li>
+                    <li><a href="?logout" title="Log Out"><i class="fa-solid fa-arrow-right-from-bracket"></i></a></li>
+                <?php
+                }else{?>
+                    <li><a href="login.php">Login</a></li>
+                    <li><a href="register.php">Register</a></li>
+                <?php
+                }?>
+                
             </ul>
         </nav>    
     </div>
@@ -30,6 +78,8 @@
             <h1>Up to <span>25</span>% Flat Sale</h1>
             <br><br>
             <p>it is a long established fact that a reader will be distracted by the readable contentof a page when looking at its layout. The point of using Lorem Ipsum is that</p>
+            
+            <button class="home-btn" style="margin-top: 5vh;width: 10vw;" onclick="window.location.href='shop.php'">Shop Now </button>
         </div>    
     </div>
 

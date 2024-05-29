@@ -1,3 +1,36 @@
+<?php
+include_once 'database/connection.php';
+
+if(isset($_POST['logSubmitBtn'])){
+    $email = $_POST['email'];
+    $inputPassword = $_POST['password'];
+
+    $sql = "SELECT * FROM users WHERE email='$email'";
+    $users = mysqli_query($connect, $sql);
+
+    if(mysqli_num_rows($users) > 0) {
+        $user = mysqli_fetch_assoc($users);
+        $hashedPassword = $user['password'];
+
+        if(password_verify($inputPassword, $hashedPassword)){
+            echo "Login Successfully";
+            $_SESSION['userId'] = $user['id'];
+            header("Location: homepage.php");
+            exit();
+
+        } else {
+            echo "Incorrect password";
+        }
+    } else {
+        echo "Email does not exist";
+    }
+
+
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,10 +46,10 @@
         </div>
         <nav>
             <ul>
-                <li><a href="homepage.html">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="register.html">Register</a></li>
+                <li><a href="homepage.php">Home</a></li>
+                <li><a href="shop.php">Shop</a></li>
+                <li><a href="login.php">Login</a></li>
+                <li><a href="register.php">Register</a></li>
             </ul>
         </nav>    
     </div>
@@ -30,11 +63,11 @@
         <div class="col2">
             <div class="logReg-form">
                 <h1 style="margin-bottom: 4vh">Login</h1>
-                <form action="">
-                    <input type="text" placeholder="Email"><br>
-                    <input type="text" placeholder="password"><br>
-                    <button class="home-btn">Login</button>
-                    <p>Don't Have Account Yet ? <a href="register.html">Register</a></p>
+                <form action="" method="post">
+                    <input  name="email" type="text" placeholder="Email" required><br>
+                    <input  name="password" type="text" placeholder="password" required><br>
+                    <button name="logSubmitBtn" type="submit" class="home-btn">Login</button>
+                    <p>Don't Have Account Yet ? <a href="register.php">Register</a></p>
                 </form>
             </div>
         </div>
