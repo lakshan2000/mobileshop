@@ -74,6 +74,11 @@ $products = mysqli_query($connect, $productsSql);
         </div>
         <nav>
             <ul>
+                <?php
+                if(isset($_SESSION['userId']) && $_SESSION['isAdmin']){
+                    echo '<li><a href="admin/admindahsbord.php">Admin</a></li>';
+                }
+                ?>
                 <li><a href="homepage.php">Home</a></li>
                 <li><a href="shop.php">Shop</a></li>                
                 <li><a href="<?php echo isset($_SESSION['userId'])?  'wishlist.php' : 'login.php' ?>" title="Wish_list"><i class="fa-solid fa-heart"></i></i></a></li>
@@ -92,7 +97,7 @@ $products = mysqli_query($connect, $productsSql);
                 while($product = mysqli_fetch_assoc($products)){
             ?>
             <div class="box" onclick="window.location.href='product.php?productId=<?php echo $product['productId'] ?>'">
-                <img src="<?php echo $product['mainImg'] ?>" alt="">
+                <img src="images/productImg/<?php echo $product['mainImg'] ?>" alt="">
                 <h4><?php echo $product['productName'] ?></h4>
                 <p><?php echo $product['camera'].'' ?></p>
                 <p><?php echo $product['ram'] . 'GB RAM | '.$product['storage'].'GB ROM'?></p>

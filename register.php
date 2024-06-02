@@ -5,6 +5,7 @@ if(isset($_POST['regSubmitBtn'])){
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
     $email = $_POST['email'];
+    $mobile = $_POST['mobile'];
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirmPassword'];
 
@@ -16,7 +17,7 @@ if(isset($_POST['regSubmitBtn'])){
         if(mysqli_num_rows($checkEmail) > 0) {
             echo 'Email already exist';
         }else{
-            $sql = "INSERT INTO users (firstName, lastName, email, password) VALUES ('$firstName', '$lastName', '$email', '$hashedPassword')";
+            $sql = "INSERT INTO users (firstName, lastName, email, mobile,password) VALUES ('$firstName', '$lastName', '$email','$mobile', '$hashedPassword')";
 
             if (mysqli_query($connect, $sql)) {
                 echo "Register successfully login now Please";

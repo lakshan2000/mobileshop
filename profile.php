@@ -49,6 +49,11 @@ if(isset($_SESSION['userId'])){
         </div>
         <nav>
             <ul>
+                <?php
+                if(isset($_SESSION['userId']) && $_SESSION['isAdmin']){
+                    echo '<li><a href="admin/admindahsbord.php">Admin</a></li>';
+                }
+                ?>
                 <li><a href="homepage.php">Home</a></li>
                 <li><a href="shop.php">Shop</a></li>                
                 <li><a href="<?php echo isset($_SESSION['userId'])?  'wishlist.php' : 'login.php' ?>" title="Wish_list"><i class="fa-solid fa-heart"></i></i></a></li>

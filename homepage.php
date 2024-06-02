@@ -5,18 +5,18 @@ if(isset($_SESSION['userId'])){
     $userId = $_SESSION['userId'];
     $sql = "SELECT * FROM users WHERE id='$userId'";
     $users = mysqli_query($connect, $sql);
+
+
     
 
     if(mysqli_num_rows($users) > 0) {
         $user = mysqli_fetch_assoc($users);
 
-        $firstName = $user['firstName'];
-        $lastName = $user['lastName'];
-        $email = $user['email'];
-        $mobile = $user['mobile'];
-        $addressLine1 = $user['addressLine1'];
-        $addressLine2 = $user['addressLine2'];
-        $addressLine3 = $user['addressLine3'];
+        if($user['isAdmin'] === 'Yes'){
+            $_SESSION['isAdmin']=true;
+        }else{
+            $_SESSION['isAdmin']=false;
+        }
 
     } else {
         echo "Please login the system";
@@ -50,7 +50,12 @@ if(isset($_SESSION['userId'])){
         </div>
         <nav>
             <ul>
-                <li><a href="admin/admindahsbord.php">Admin</a></li>
+                <?php
+                if(isset($_SESSION['userId']) && $_SESSION['isAdmin']){
+                    echo '<li><a href="admin/admindahsbord.php">Admin</a></li>';
+                }
+                ?>
+                
                 <li><a href="homepage.php">Home</a></li>
                 <li><a href="shop.php">Shop</a></li>
                 <li><a href="#aboutus">About</a></li>

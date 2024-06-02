@@ -1,3 +1,30 @@
+<?php
+include_once '../database/connection.php';
+
+if(isset($_SESSION['userId'])){
+    $userId = $_SESSION['userId'];
+
+
+    if(isset($_GET['logout'])){
+        session_destroy();
+        header("Location: homepage.php");
+        exit(); 
+    }
+
+
+    $ordersSql = "SELECT * FROM orders 
+              INNER JOIN orderDetails ON orders.orderId = orderDetails.orderId 
+              INNER JOIN products ON orderDetails.productId = products.productId 
+              INNER JOIN users ON  orders.userId = users.Id
+              ORDER BY orders.orderId DESC";
+
+    $orders = mysqli_query($connect, $ordersSql);
+
+
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,15 +41,13 @@
         </div>
         <nav>
             <ul>
-                <li><a href="admindahsbord.html">Admin</a></li>
-                <li><a href="../homepage.html">Home</a></li>
-                <li><a href="../shop.html">Shop</a></li>                
-                <li><a href="../wishlist.html" title="Wish_list"><i class="fa-solid fa-heart"></i></i></a></li>
-                <li><a href="../cart.html" title="Cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
-                <li><a href="../profile.html" title="Profile"><i class="fa-solid fa-user"></i></a></li>
-                <li><a href="../homepage.html" title="Log Out"><i class="fa-solid fa-arrow-right-from-bracket"></i></i></a></li>
-                <!-- <li><a href="login.html">Login</a></li>
-                <li><a href="register.html">Register</a></li> -->
+                <li><a href="admindahsbord.php">Admin</a></li>
+                <li><a href="../homepage.php">Home</a></li>
+                <li><a href="../shop.php">Shop</a></li>                
+                <li><a href="../wishlist.php" title="Wish_list"><i class="fa-solid fa-heart"></i></i></a></li>
+                <li><a href="../cart.php" title="Cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <li><a href="../profile.php" title="Profile"><i class="fa-solid fa-user"></i></a></li>
+                <li><a href="../homepage.php" title="Log Out"><i class="fa-solid fa-arrow-right-from-bracket"></i></i></a></li>
             </ul>
         </nav> 
     </div>
@@ -30,27 +55,41 @@
 
     <div class="payment-container">
         <div class="header" style="margin-bottom: 0;" >Admin - Orders</div>
-        <form action="">
-            <div class="order-container" style="font-size: 12px;">
+
+        <?php
+        if(mysqli_num_rows($orders) > 0){
+        ?>
+        <form action="" method="post"  style="width: 90%;">
+            <div class="order-container" >
                 <div class="order-row">
-                    <table>
+                    <table >
                         <tr>
-                            <th>Order Id</th>
                             <th>Date</th>
                             <th>Customer Details</th>
+                            <th>Reciver Details</th>
                             <th>Items</th>
                             <th>Quantity</th>
                             <th>Total Bill</th>
-                            <th>Paymont Methode</th>
+                            <th>Methode</th>
                             <th>Status</th>
                         </tr>
-                        <tr>
-                            <td>001</td>
-                            <td>2024.08.09</td>
+                        <?php
+                        while($order = mysqli_fetch_assoc($orders)){
+                        ?>
+                        <tr style="font-size: 13px;">
+                            <td><?php echo $order['orderDate'] ?></td>
                             <td>
-                                <p>lakshan Ekanayaka</p>
-                                <p>lakshanekanayaka@gmail.com</p>
-                                <p>701543435</p>
+                                <p><?php echo $order['firstName'].' '.$order['lastName']?></p>
+                                <p><?php echo $order['email'] ?></p>
+                                <p><?php echo $order['mobile'] ?></p>
+                            </td>
+                            <td>
+                                <p><?php echo $order['fullName'] ?></p>
+                                <p><?php echo $order['reciverMobile'] ?></p>
+                                <p>zip : <?php echo  $order['zipcode'] ?></p>
+                                <p><?php echo $order['orderAdressLine1'] ?></p>
+                                <p><?php echo $order['orderAdressLine2'] ?></p>
+                                <p><?php echo $order['orderAdressLine3'] ?></p>
                             </td>
                             <td>
                                 <p>samsung S11</p>
@@ -67,36 +106,16 @@
                                 <input  style="font-size: 12px; width: 80%;" type="button" value="Delivered" class="home-btn" >
                             </td>
                         </tr>
-                        <tr>
-                            <td>002</td>
-                            <td>2024.08.29</td>
-                            <td>
-                                <p>lakshan Ekanayaka</p>
-                                <p>lakshanekanayaka@gmail.com</p>
-                                <p>701543435</p>
-                            </td>
-                            <td>
-                                <p>samsung S11</p>
-                                <p>Pixel5</p>
-                            </td>
-                            <td>
-                                <p>1</p>
-                                <p>1</p>
-                            </td>
-                            <td>Rs.675,900.00</td>
-                            <td><input style="font-size: 12px; width: 80%;"  type="button" value="Cash On Delevery" class="home-btn" readonly></td>
-                            <td>
-                                <input style="font-size: 12px; width: 80%;" type="button" value="Shipped" class="home-btn" readonly>
-                                <input style="font-size: 12px; width: 80%;" type="button" value="Delivering" class="home-btn" readonly>
-                            </td>
-                        </tr>
-                        
-                        
-                        
+                        <?php
+                        }
+                        ?>
                     </table>
                 </div>
             </div>
         </form>
+        <?php
+        }
+        ?>
     </div>
 
 
