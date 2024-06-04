@@ -7,18 +7,33 @@ if(isset($_SESSION['userId'])){
 
     if(isset($_GET['logout'])){
         session_destroy();
-        header("Location: homepage.php");
+        header("Location: ../homepage.php");
         exit(); 
     }
 
 
-    $ordersSql = "SELECT * FROM orders 
+    $ordersSql = "SELECT DISTINCT orders.orderId,userId, orderDate, fullName, reciverMobile, orderAdressLine1, orderAdressLine2, orderAdressLine3, zipcode, paymentMethode,totalBill,status,firstName, lastName, email, mobile FROM orders 
               INNER JOIN orderDetails ON orders.orderId = orderDetails.orderId 
               INNER JOIN products ON orderDetails.productId = products.productId 
               INNER JOIN users ON  orders.userId = users.Id
               ORDER BY orders.orderId DESC";
 
     $orders = mysqli_query($connect, $ordersSql);
+
+    if(isset($_POST['shipBtn'])){
+        $orderId = $_POST['orderId'];
+        $updatesql = "UPDATE orders SET `status`='Shipped' WHERE orderId='$orderId'";
+        $updateresult = mysqli_query($connect, $updatesql);
+    
+        if ($updateresult) {
+            header("Location: adminOrders.php");
+            
+        }else{
+            echo "Error updating quantity in the database";
+            exit();
+        }
+
+    }
 
 
 }
@@ -47,7 +62,7 @@ if(isset($_SESSION['userId'])){
                 <li><a href="../wishlist.php" title="Wish_list"><i class="fa-solid fa-heart"></i></i></a></li>
                 <li><a href="../cart.php" title="Cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
                 <li><a href="../profile.php" title="Profile"><i class="fa-solid fa-user"></i></a></li>
-                <li><a href="../homepage.php" title="Log Out"><i class="fa-solid fa-arrow-right-from-bracket"></i></i></a></li>
+                <li><a  href="?logout" title="Log Out"><i class="fa-solid fa-arrow-right-from-bracket"></i></i></a></li>
             </ul>
         </nav> 
     </div>
@@ -59,7 +74,7 @@ if(isset($_SESSION['userId'])){
         <?php
         if(mysqli_num_rows($orders) > 0){
         ?>
-        <form action="" method="post"  style="width: 90%;">
+        <form action="" method="post"  style="width: 100%;">
             <div class="order-container" >
                 <div class="order-row">
                     <table >
@@ -75,7 +90,9 @@ if(isset($_SESSION['userId'])){
                         </tr>
                         <?php
                         while($order = mysqli_fetch_assoc($orders)){
+                            $orderId = $order['orderId'];
                         ?>
+                        <form action="" method="post">
                         <tr style="font-size: 13px;">
                             <td><?php echo $order['orderDate'] ?></td>
                             <td>
@@ -92,20 +109,48 @@ if(isset($_SESSION['userId'])){
                                 <p><?php echo $order['orderAdressLine3'] ?></p>
                             </td>
                             <td>
-                                <p>samsung S11</p>
-                                <p>Pixel5</p>
+                                <?php
+                                $sql = "SELECT * FROM orderDetails
+                                        INNER JOIN products ON orderDetails.productId = products.productId 
+                                        WHERE orderId = '$orderId'";
+                                $results = mysqli_query($connect, $sql);
+
+                                
+                                if(mysqli_num_rows($results) > 0) {
+                                    while($result = mysqli_fetch_assoc($results)){        
+                                    ?>
+                                    <p><?php echo $result['productName']?></p>
+                                    <?php
+                                    }
+                                }
+                                    ?>
                             </td>
                             <td>
-                                <p>1</p>
-                                <p>1</p>
+                                <?php
+                                $sql = "SELECT * FROM orderDetails
+                                        INNER JOIN products ON orderDetails.productId = products.productId 
+                                        WHERE orderId = '$orderId'";
+                                $results = mysqli_query($connect, $sql);
+
+                                
+                                if(mysqli_num_rows($results) > 0) {
+                                    while($result = mysqli_fetch_assoc($results)){        
+                                    ?>
+                                    <p>Rs.<?php echo $result['price']?>.00</p>
+                                    <?php
+                                    }
+                                }
+                                ?>
                             </td>
-                            <td>Rs.675,900.00</td>
-                            <td><input  style="font-size: 12px; width: 80%;" type="button" value="Online" class="home-btn" readonly></td>
+                            <td>Rs.<?php echo $order['totalBill']?>.00</td>
+                            <td><input  style="font-size: 12px; width: 80%;" type="button" value="<?php echo $order['paymentMethode']?>" class="home-btn" readonly></td>
                             <td>
-                                <input  style="font-size: 12px; width: 80%;" type="button" value="Ship" class="home-btn" >
-                                <input  style="font-size: 12px; width: 80%;" type="button" value="Delivered" class="home-btn" >
+                                <input  name="orderId" type="hidden" value="<?php echo $order['orderId'] ?>" class="home-btn" readonly>
+                                <input  style="font-size: 12px; width: 80%;" name="shipBtn" type="submit" value="<?php echo $order['status'] ?>" class="home-btn"  >
+                                <input  style="font-size: 12px; width: 80%;" type="button" value="Deliver" class="home-btn" readonly>
                             </td>
                         </tr>
+                        </form>
                         <?php
                         }
                         ?>

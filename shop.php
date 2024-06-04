@@ -91,30 +91,49 @@ $products = mysqli_query($connect, $productsSql);
 
     <div class="shop-container">
         <div class="header">Feauture Items</div>
+        <?php
+        $productCount = 0;
+        if(mysqli_num_rows($products) > 0) {
+        ?>
         <div class="row-container">  
             <?php
-            if(mysqli_num_rows($products) > 0) {
-                while($product = mysqli_fetch_assoc($products)){
+            while($product = mysqli_fetch_assoc($products)){
+                $productCount++;
             ?>
             <div class="box" onclick="window.location.href='product.php?productId=<?php echo $product['productId'] ?>'">
                 <img src="images/productImg/<?php echo $product['mainImg'] ?>" alt="">
                 <h4><?php echo $product['productName'] ?></h4>
                 <p><?php echo $product['camera'].'' ?></p>
                 <p><?php echo $product['ram'] . 'GB RAM | '.$product['storage'].'GB ROM'?></p>
-                
-                <form  class="box-btn-raw"action="" method="post">
+                            
+                <form class="box-btn-raw" action="" method="post">
                     <button name="addToWishlist" class="cartWishlist-btn" title="Add to Wish-List"><i class="fa-solid fa-heart"></i></button>
-                    <button class="home-btn" ><?php echo 'Rs.'.$product['price']?></button>
+                    <button class="home-btn"><?php echo 'Rs.'.$product['price']?></button>
                     <button name="addToCart" class="cartWishlist-btn" title="Add to Cart"><i class="fa-solid fa-cart-shopping"></i></button>
                     <input name='productId' type="hidden" value="<?php echo $product['productId']?>" >
                 </form>
             </div>
+
             <?php
+            if ($productCount % 4 == 0) {
+                echo '</div><div class="row-container">';
             }
-            }
-            ?>     
             
+            }
+            ?>        
         </div>
+
+        <?php
+        }else{
+        ?>
+        <div class="empty-box">
+            <h1>Products Empty!!!</h1>
+        </div>
+        <?php 
+        }
+        ?>>
+
+
     </div>
 
 

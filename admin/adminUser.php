@@ -7,7 +7,7 @@ if(isset($_SESSION['userId'])){
 
     if(isset($_GET['logout'])){
         session_destroy();
-        header("Location: homepage.php");
+        header("Location: ../homepage.php");
         exit(); 
     }
 
@@ -84,7 +84,7 @@ if(isset($_SESSION['userId'])){
                 <li><a href="../wishlist.php" title="Wish_list"><i class="fa-solid fa-heart"></i></i></a></li>
                 <li><a href="../cart.php" title="Cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
                 <li><a href="../profile.php" title="Profile"><i class="fa-solid fa-user"></i></a></li>
-                <li><a name='logout' title="Log Out"><i class="fa-solid fa-arrow-right-from-bracket"></i></i></a></li>
+                <li><a  href="?logout" name='logout' title="Log Out"><i class="fa-solid fa-arrow-right-from-bracket"></i></i></a></li>
             </ul>
         </nav> 
     </div>
@@ -118,7 +118,7 @@ if(isset($_SESSION['userId'])){
     ?>
     <form action="" style="width: 90%;" method="post">
         <fieldset class="order-container " >
-            <legend><b>All Users</b></legend>
+            <legend><b>All Admins</b></legend>
             <div class="order-row" >
                 <table>
                     <tr>

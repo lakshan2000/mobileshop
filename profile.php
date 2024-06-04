@@ -3,6 +3,14 @@ include_once 'database/connection.php';
 
 if(isset($_SESSION['userId'])){
     $userId = $_SESSION['userId'];
+
+    if(isset($_GET['logout'])){
+        session_destroy();
+        header("Location: homepage.php");
+        exit(); 
+    }
+
+    
     $sql = "SELECT * FROM users WHERE id='$userId'";
     $users = mysqli_query($connect, $sql);
     
@@ -22,11 +30,7 @@ if(isset($_SESSION['userId'])){
         echo "Please login the system";
     }
 
-    $ordersSql = "SELECT * FROM orders 
-              INNER JOIN orderDetails ON orders.orderId = orderDetails.orderId 
-              INNER JOIN products ON orderDetails.productId = products.productId 
-              WHERE userId = '$userId'
-              ORDER BY orders.orderDate DESC";
+    $ordersSql = "SELECT DISTINCT orderId, orderDate, totalBill, status FROM orders ORDER BY orders.orderId DESC";
     $orders = mysqli_query($connect, $ordersSql);
 
 
@@ -81,7 +85,7 @@ if(isset($_SESSION['userId'])){
             </fieldset>
         </form>
         <?php
-         if(mysqli_num_rows($orders) > 0) {
+        if(mysqli_num_rows($orders) > 0) {
         ?>
         <form action="" method="post" style="width: 90%;"> 
             <fieldset class="order-container">
@@ -99,27 +103,73 @@ if(isset($_SESSION['userId'])){
                         </tr>
                         <?php
                         while($order = mysqli_fetch_assoc($orders)){
+                            $orderId = $order['orderId'];
                         ?>
                         <tr>
-                            <td><?php echo $order['orderId']?></td>
+                            <td><?php echo $orderId ?></td>
                             <td><?php echo $order['orderDate']?></td>
+                            <?php
+                            
+                            ?>
+
                             <td>
-                                <?php echo $order['productName']?>
+                                <?php
+                                $sql = "SELECT * FROM orderDetails
+                                        INNER JOIN products ON orderDetails.productId = products.productId 
+                                        WHERE orderId = '$orderId'";
+                                $results = mysqli_query($connect, $sql);
+
+                                
+                                if(mysqli_num_rows($results) > 0) {
+                                    while($result = mysqli_fetch_assoc($results)){        
+                                    ?>
+                                    <p><?php echo $result['productName']?></p>
+                                    <?php
+                                    }
+                                }
+                                    ?>
                             </td>
                             <td>
-                                <?php echo $order['price']?>
+                                <?php
+                                $sql = "SELECT * FROM orderDetails
+                                        INNER JOIN products ON orderDetails.productId = products.productId 
+                                        WHERE orderId = '$orderId'";
+                                $results = mysqli_query($connect, $sql);
+
+                                
+                                if(mysqli_num_rows($results) > 0) {
+                                    while($result = mysqli_fetch_assoc($results)){        
+                                    ?>
+                                    <p>Rs.<?php echo $result['price']?>.00</p>
+                                    <?php
+                                    }
+                                }
+                                    ?>
                             </td>
                             <td>
-                                <?php echo $order['orderQuantity']?>
+                                <?php
+                                $sql = "SELECT * FROM orderDetails
+                                        INNER JOIN products ON orderDetails.productId = products.productId 
+                                        WHERE orderId = '$orderId'";
+                                $results = mysqli_query($connect, $sql);
+
+                                
+                                if(mysqli_num_rows($results) > 0) {
+                                    while($result = mysqli_fetch_assoc($results)){        
+                                    ?>
+                                    <p><?php echo $result['orderQuantity']?></p>
+                                    <?php
+                                    }
+                                }
+                                    ?>
                             </td>
-                            <td><?php echo $order['price']?></td>
+                            <td>Rs.<?php echo $order['totalBill']?>.00</td>
                             <td>
-                                <input type="button" value="Placed" class="home-btn" readonly>
+                                <input type="button" value="<?php echo $order['status']?>" class="home-btn" readonly>
                                 <input type="button" value="Recieved" class="home-btn">
                             </td>
-                        </tr> 
-                        
-                        <?php
+                        </tr>     
+                        <?php 
                         }
                         ?>
                     </table>

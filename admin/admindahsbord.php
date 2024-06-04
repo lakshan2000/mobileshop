@@ -8,7 +8,7 @@ if(isset($_SESSION['userId'])){
 
     if(isset($_GET['logout'])){
         session_destroy();
-        header("Location: homepage.php");
+        header("Location: ../homepage.php");
         exit(); 
     }
 
@@ -39,7 +39,7 @@ if(isset($_SESSION['userId'])){
                 <li><a href="../wishlist.php" title="Wish_list"><i class="fa-solid fa-heart"></i></i></a></li>
                 <li><a href="../cart.php" title="Cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
                 <li><a href="../profile.php" title="Profile"><i class="fa-solid fa-user"></i></a></li>
-                <li><a href="../homepage.php" title="Log Out"><i class="fa-solid fa-arrow-right-from-bracket"></i></i></a></li>
+                <li><a  href="?logout" title="Log Out"><i class="fa-solid fa-arrow-right-from-bracket"></i></i></a></li>
             </ul>
         </nav> 
     </div>
@@ -52,7 +52,7 @@ if(isset($_SESSION['userId'])){
                 <input class="home-btn" type="button" name="Products" value="Products" onclick="window.location.href='adminProducts.php'">
                 <input class="home-btn" type="button" name="Orders" value="Orders"  onclick="window.location.href='adminOrders.php'">
                 <input class="home-btn" type="button" name="Messages" value="Messages" onclick="window.location.href='adminMessage.php'">
-                <input class="home-btn" type="button" name="Admin&Users" value="Admin & Users" onclick="window.location.href='adminUser.php'">
+                <input class="home-btn" type="button" name="Admin&Users" value="Admins" onclick="window.location.href='adminUser.php'">
                 
             </fieldset>
     </div>

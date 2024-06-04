@@ -145,10 +145,10 @@ if(isset($_POST['placeOrderBtn'])) {
     if(mysqli_num_rows($products) > 0) {
         While($product = mysqli_fetch_assoc($products)){;
     ?>
-        <div class="payment-container">
+    <div class="payment-container">
         <div class="header">Place Order</div>
         <form action="" method="post">
-        <div class="payment-row">
+        <div class="payment-row" >
             <table>
                 <tr>
                     <th>Item</th>
@@ -158,12 +158,12 @@ if(isset($_POST['placeOrderBtn'])) {
                 </tr>
                 <tr>
                     <td>
-                        <img src="<?php echo $product['mainImg'] ?>" alt="">
+                        <img src="images/productImg/<?php echo $product['mainImg'] ?>" alt="">
                         <p><?php echo $product['productName'] ?></p>
                     </td>                   
                     <td id='itemPrice'><?php echo 'Rs.'.$product['price'] ?></td>
                     <td>
-                        <div class="box-btn-raw" style="width:70%;margin-left:15%;font-size:18px">
+                        <div class="box-btn-raw">
                             <i class="fa-solid fa-plus" onclick="quantitySet('plus')" ></i>
                             <input style="background: none;border:none;" type="button"id='quantity' value="1" >
                             <input type="hidden" name="quantity" id="hiddenQuantity" value="1">
@@ -174,7 +174,7 @@ if(isset($_POST['placeOrderBtn'])) {
                 </tr>
             </table>
         </div>
-        
+             
         <fieldset>
              <legend><b>Payments Details</b></legend>
              <div class="header" style="font-size: 20px;" id="mainBill">Total Pay : <?php echo 'Rs.'.$product['price'] ?></div>

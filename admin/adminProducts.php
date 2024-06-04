@@ -7,7 +7,7 @@ if(isset($_SESSION['userId'])){
 
     if(isset($_GET['logout'])){
         session_destroy();
-        header("Location: homepage.php");
+        header("Location: ../homepage.php");
         exit(); 
     }
 
@@ -53,6 +53,52 @@ if(isset($_SESSION['userId'])){
         }
     }
 
+    if(isset($_POST['updateBtn'])){
+        $productId = $_POST['productId'];
+        $productName = $_POST['productName'];
+        $upadetImg = $_FILES["upadetImg"]["name"];
+        $camera = $_POST['camera'];
+        $ram = $_POST['ram'];
+        $storage = $_POST['storage'];
+        $newPrice = $_POST['newPrice'];
+        $availableQuantity = $_POST['availableQuantity'];
+    
+        $sql = "UPDATE products SET ";
+    
+        if (!empty($productName)) {
+            $sql .= "productName='$productName', ";
+        }
+        if (!empty($upadetImg)) {
+            $sql .= "mainImg='$upadetImg', ";
+        }
+        if (!empty($camera)) {
+            $sql .= "camera='$camera', ";
+        }
+        if (!empty($ram)) {
+            $sql .= "ram='$ram', ";
+        }
+        if (!empty($storage)) {
+            $sql .= "storage='$storage', ";
+        }
+        if (!empty($newPrice)) {
+            $sql .= "price='$newPrice', ";
+        }
+        if (!empty($availableQuantity)) {
+            $sql .= "quantity='$availableQuantity', ";
+        } 
+
+        $sql = rtrim($sql, ", ");
+
+        $sql .= " WHERE productId='$productId' ";
+
+        $updateProduct = mysqli_query($connect, $sql);
+
+        if($updateProduct){
+            echo "Update Product Details Successfully";
+            header("Location: adminProducts.php");
+            exit();
+        }
+    }
 
     $productsSql = "SELECT * FROM products";
     $products = mysqli_query($connect, $productsSql);
@@ -84,7 +130,7 @@ if(isset($_SESSION['userId'])){
                 <li><a href="../wishlist.php" title="Wish_list"><i class="fa-solid fa-heart"></i></i></a></li>
                 <li><a href="../cart.php" title="Cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
                 <li><a href="../profile.php" title="Profile"><i class="fa-solid fa-user"></i></a></li>
-                <li><a href="../homepage.php" title="Log Out"><i class="fa-solid fa-arrow-right-from-bracket"></i></i></a></li>
+                <li><a  href="?logout" title="Log Out"><i class="fa-solid fa-arrow-right-from-bracket"></i></i></a></li>
             </ul>
         </nav> 
     </div>
@@ -145,6 +191,7 @@ if(isset($_SESSION['userId'])){
                     <?php
                     while($product = mysqli_fetch_assoc($products)){
                     ?>
+                    <form action="" method="post" enctype="multipart/form-data" >
                     <tr>
                         <td><?php echo $product['productName'] ?></td>
                         <td><img src="../images/productImg/<?php echo $product['mainImg'] ?>"width="20px" alt=""></td>                   
@@ -162,33 +209,43 @@ if(isset($_SESSION['userId'])){
                                 <input name='productId' type="hidden" value="<?php echo $product['productId']?>" >
                             </div>
                         </td>      
-                    </tr>                
+                    </tr> 
+                    </form> 
+                    <form action="" method="post" enctype="multipart/form-data">              
                     <tr class="product-Edit-Form" id="product-Edit-Form<?php echo $product['productId'] ?>">
                         <div >
-                            <td><input type="text" placeholder="<?php echo $product['productName'] ?>"></td>
-                            <td><input type="file"></td>                   
+                            <td><input name="productName" type="text" placeholder="<?php echo $product['productName'] ?>"></td>
+                            <td><input name="upadetImg" type="file"></td>                   
                             <td>
                                 <input name="camera" type="text" placeholder="Camera"><br>
                                 <input name="ram" type="text" placeholder="Ram"><br>
                                 <input name="storage" type="text" placeholder="Storage">
                             </td>
-                            <td><input type="text" placeholder="New price"></td>
-                            <td><input type="text" placeholder="Avilble quantity"></td>
+                            <td><input name="newPrice" type="text" placeholder="New price"></td>
+                            <td><input name="availableQuantity" type="text" placeholder="Avilble quantity"></td>
                             <td>
-                                <input type="button" name="updateBtn" style="width: 100%;" value="Update" class="home-btn" width="100%">
+                                <input type="submit" name="updateBtn" style="width: 100%;" value="Update" class="home-btn" width="100%">
+                                <input name='productId' type="hidden" value="<?php echo $product['productId']?>" >
                             </td>   
                         </div>   
                     </tr>
+                    </form> 
                     <?php
                     }
                     ?>
                 </table>
             </div>
         </fieldset>
-    </form>
-    <?php
-    }
-    ?>
+        </form>
+        <?php
+        }else{
+        ?>
+        <div class="empty-box">
+            <h1>Not Any Messages!!!</h1>
+        </div>
+        <?php 
+        }
+        ?>>
 
     </div>
 

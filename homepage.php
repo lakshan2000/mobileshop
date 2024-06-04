@@ -29,6 +29,24 @@ if(isset($_SESSION['userId'])){
         exit(); 
     }
 
+    if(isset($_POST['sendMsgBtn'])){
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $phone = $_POST['phone'];
+        $message = $_POST['message'];
+        $date = date('Y-m-d');
+
+
+        $sql = "INSERT INTO messages (name, email, date, phone, body) VALUES ('$name', '$email', '$date', '$phone', '$message')";
+
+        if (mysqli_query($connect, $sql)) {
+            echo "Message sent successfully";
+        } else {
+            echo "Error ";
+        }
+    }
+    
+
 
 }
 ?>
@@ -140,12 +158,12 @@ if(isset($_SESSION['userId'])){
     <div class="contact" id="contact">
         <div class="header">Contact Us</div>
 
-        <form   class="contact-form" action="">
-            <input type="text" placeholder="Name"><br>
-            <input type="text" placeholder="Email"><br>
-            <input type="text" placeholder="Phone"><br>
+        <form   class="contact-form" method="post">
+            <input name="name" type="text" placeholder="Name"><br>
+            <input name="email" type="text" placeholder="Email"><br>
+            <input name="phone" type="text" placeholder="Phone"><br>
             <textarea name="message" rows="5" placeholder="Message"></textarea><br>
-            <button class="home-btn">Send Meassage</button>
+            <button type="submit" name="sendMsgBtn" class="home-btn">Send Meassage</button>
         </form>
 
     </div>
