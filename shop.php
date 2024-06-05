@@ -51,6 +51,11 @@ if(isset($_SESSION['userId'])){
     }
 
 
+}else{
+    if(isset($_POST['addToCart'])|| isset($_POST['addToWishlist'])){
+        header("Location: login.php");
+        exit(); 
+    }
 }
 
 $productsSql = 'SELECT * FROM products';
@@ -68,26 +73,9 @@ $products = mysqli_query($connect, $productsSql);
     <script src="https://kit.fontawesome.com/ac1e60548d.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="navbar">
-        <div class="logo">
-            <img src="images/logo.png">
-        </div>
-        <nav>
-            <ul>
-                <?php
-                if(isset($_SESSION['userId']) && $_SESSION['isAdmin']){
-                    echo '<li><a href="admin/admindahsbord.php">Admin</a></li>';
-                }
-                ?>
-                <li><a href="homepage.php">Home</a></li>
-                <li><a href="shop.php">Shop</a></li>                
-                <li><a href="<?php echo isset($_SESSION['userId'])?  'wishlist.php' : 'login.php' ?>" title="Wish_list"><i class="fa-solid fa-heart"></i></i></a></li>
-                <li><a href="<?php echo isset($_SESSION['userId'])?  'cart.php' : 'login.php' ?>" title="Cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
-                <li><a href="<?php echo isset($_SESSION['userId'])?  'profile.php' : 'login.php' ?>" title="Profile"><i class="fa-solid fa-user"></i></a></li>
-                <li><a href="?logout" title="Log Out"><i class="fa-solid fa-arrow-right-from-bracket"></i></i></a></li>
-            </ul>
-        </nav>    
-    </div>
+    <?php
+        include_once 'components/header.php';
+    ?>
 
     <div class="shop-container">
         <div class="header">Feauture Items</div>
@@ -139,33 +127,9 @@ $products = mysqli_query($connect, $productsSql);
 
 
 
-
-
-    
-    <div class="footer" id="footer">
-        <div class="footer-row">
-            <div class="col4">
-                <div class="fHeader">Address</div>
-                <p>A11/301</p>
-                <p>Wattala Road,Ja Ela</p>
-                <p>Colombo 05</p>
-            </div>
-            <div class="col4">
-                <div class="fHeader">Open Hours</div>
-                <p>Mon - Fri - 08:00 to 20.00</p>
-                <p>Sat - 08:00 to 22.00</p>
-                <p>Sun - 08:00 to 18.00</p>
-            </div>
-            <div class="col4">
-                <div class="fHeader">Social Media</div>
-                <p>Facebook</p>
-                <p>Twitter</p>
-                <p>Instragram</p>
-            </div>
-        </div>
-    </div>
-
-
+    <?php
+        include_once 'components/footer.php';
+    ?>
     
 
     

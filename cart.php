@@ -60,7 +60,7 @@ if(isset($_SESSION['userId'])){
         $zip = $_POST['zip'];
         $mobile = $_POST['mobile'];
         $date = date('Y-m-d');
-        $paymentMethode = 'Cash On Delivery';
+        $paymentMethode = $_POST['paymentMethode'];
         $totalBill =0;
 
         $sql = "SELECT * FROM cart 
@@ -165,6 +165,9 @@ if(isset($_SESSION['userId'])){
         }
     }
     
+}else{
+    header("Location: homepage.php");
+    exit();
 }
 
 
@@ -182,21 +185,9 @@ if(isset($_SESSION['userId'])){
     <script src="https://kit.fontawesome.com/ac1e60548d.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="navbar">
-        <div class="logo">
-            <img src="images/logo.png">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="homepage.php">Home</a></li>
-                <li><a href="shop.php">Shop</a></li>                
-                <li><a href="<?php echo isset($_SESSION['userId'])?  'wishlist.php' : 'login.php' ?>" title="Wish_list"><i class="fa-solid fa-heart"></i></i></a></li>
-                <li><a href="<?php echo isset($_SESSION['userId'])?  'cart.php' : 'login.php' ?>" title="Cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
-                <li><a href="<?php echo isset($_SESSION['userId'])?  'profile.php' : 'login.html' ?>" title="Profile"><i class="fa-solid fa-user"></i></a></li>
-                <li><a href="?logout" title="Log Out"><i class="fa-solid fa-arrow-right-from-bracket"></i></i></a></li>
-            </ul>
-        </nav> 
-    </div>
+    <?php
+        include_once 'components/header.php';
+    ?>
 
     <div class="payment-container">
         <div class="header">Your Cart</div>
@@ -228,9 +219,9 @@ if(isset($_SESSION['userId'])){
                             <td id="itemPrice<?php echo $index ?>">Rs.<?php echo $cartItem['price']?>.00</td>
                             <td>
                                 <div class="box-btn-raw" >
-                                    <i class="fa-solid fa-plus"   onclick="quantitySet('plus','<?php echo $index ?>','<?php echo $total ?>')" ></i>
-                                    <input style="background: none;border:none;" type="button"id='quantity<?php echo $index ?>' value="1" >
                                     <i class="fa-solid fa-minus" onclick="quantitySet('minus', '<?php echo $index ?>','<?php echo $total ?>')" ></i>
+                                    <input style="background: none;border:none;" type="button"id='quantity<?php echo $index ?>' value="1" >
+                                    <i class="fa-solid fa-plus"   onclick="quantitySet('plus','<?php echo $index ?>','<?php echo $total ?>')" ></i>
                                     <input name='productId' type="hidden" value="<?php echo $index ?>" >
                                 </div>
                             </td>
@@ -305,28 +296,9 @@ if(isset($_SESSION['userId'])){
     </div>
     
 
-    <div class="footer" id="footer">
-        <div class="footer-row">
-            <div class="col4">
-                <div class="fHeader">Address</div>
-                <p>A11/301</p>
-                <p>Wattala Road,Ja Ela</p>
-                <p>Colombo 05</p>
-            </div>
-            <div class="col4">
-                <div class="fHeader">Open Hours</div>
-                <p>Mon - Fri - 08:00 to 20.00</p>
-                <p>Sat - 08:00 to 22.00</p>
-                <p>Sun - 08:00 to 18.00</p>
-            </div>
-            <div class="col4">
-                <div class="fHeader">Social Media</div>
-                <p>Facebook</p>
-                <p>Twitter</p>
-                <p>Instragram</p>
-            </div>
-        </div>
-    </div>
+    <?php
+        include_once 'components/footer.php';
+    ?>
     
     
 
