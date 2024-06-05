@@ -110,7 +110,7 @@ if(isset($_SESSION['userId'])){
                                 if(mysqli_num_rows($results) > 0) {
                                     while($result = mysqli_fetch_assoc($results)){        
                                     ?>
-                                    <p><?php echo $result['productName']?></p>
+                                    <p><?php echo $result['orderQunatity']?></p>
                                     <?php
                                     }
                                 }
