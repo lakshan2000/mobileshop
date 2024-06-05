@@ -235,7 +235,7 @@ if(isset($_SESSION['userId'])){
         </div>
         <?php 
         }
-        ?>>
+        ?>
 
     </div>
 

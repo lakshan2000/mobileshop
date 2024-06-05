@@ -35,7 +35,7 @@ if(isset($_SESSION['userId'])){
     
                 if (mysqli_query($connect, $sql)) {
                     echo "Register successfully login now Please";
-                    header("Location: adminUser.php");
+                    header("Location: admin.php");
                     exit();
                 } else {
                     echo "Error: ";

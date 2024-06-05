@@ -13,7 +13,7 @@
             <li><a href="shop.php">Shop</a></li>                
             <li><a href="<?php echo isset($_SESSION['userId'])?  'wishlist.php' : 'login.php' ?>" title="Wish_list"><i class="fa-solid fa-heart"></i></i></a></li>
             <li><a href="<?php echo isset($_SESSION['userId'])?  'cart.php' : 'login.php' ?>" title="Cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
-            <li><a href="<?php echo isset($_SESSION['userId'])?  'profile.php' : 'login.html' ?>" title="Profile"><i class="fa-solid fa-user"></i></a></li>
+            <li><a href="<?php echo isset($_SESSION['userId'])?  'profile.php' : 'login.php' ?>" title="Profile"><i class="fa-solid fa-user"></i></a></li>
             <li><a href="?logout" title="Log Out"><i class="fa-solid fa-arrow-right-from-bracket"></i></i></a></li>
         </ul>
     </nav>    

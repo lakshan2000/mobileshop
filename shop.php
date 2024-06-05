@@ -77,7 +77,7 @@ $products = mysqli_query($connect, $productsSql);
         include_once 'components/header.php';
     ?>
 
-    <div class="shop-container">
+    <div class="shop-container payment-container">
         <div class="header">Feauture Items</div>
         <?php
         $productCount = 0;
@@ -94,7 +94,7 @@ $products = mysqli_query($connect, $productsSql);
                 <p><?php echo $product['camera'].'' ?></p>
                 <p><?php echo $product['ram'] . 'GB RAM | '.$product['storage'].'GB ROM'?></p>
                             
-                <form class="box-btn-raw" action="" method="post">
+                <form class="box-btn-raw" action="" method="post" style="display: flex;flex-direction:row;width:100%;justify-content:space-around">
                     <button name="addToWishlist" class="cartWishlist-btn" title="Add to Wish-List"><i class="fa-solid fa-heart"></i></button>
                     <button class="home-btn"><?php echo 'Rs.'.$product['price']?></button>
                     <button name="addToCart" class="cartWishlist-btn" title="Add to Cart"><i class="fa-solid fa-cart-shopping"></i></button>
@@ -119,7 +119,7 @@ $products = mysqli_query($connect, $productsSql);
         </div>
         <?php 
         }
-        ?>>
+        ?>
 
 
     </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2024 at 01:20 PM
+-- Generation Time: Jun 05, 2024 at 03:38 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -48,6 +48,14 @@ CREATE TABLE `messages` (
   `body` varchar(10000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`id`, `date`, `name`, `email`, `phone`, `body`) VALUES
+(4, '2024-06-05', 'admin2', 'admin2@gmail.com', '+94 701674282', 'Hi i forgot admin Password,so i cant open shop.'),
+(5, '2024-06-05', 'Lakshan Ekanayake', 'lakshanekanayaka2000@gmail.com', '0713755822', 'I logged ');
+
 -- --------------------------------------------------------
 
 --
@@ -80,6 +88,14 @@ CREATE TABLE `orders` (
   `totalBill` int(100) NOT NULL,
   `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`orderId`, `userId`, `orderDate`, `fullName`, `reciverMobile`, `orderAdressLine1`, `orderAdressLine2`, `orderAdressLine3`, `zipcode`, `paymentMethode`, `totalBill`, `status`) VALUES
+(88, 19, '2024-06-05', 'Lakshan Ekanayake', '0713755822', '413/1', 'Thennakoongama', 'Moragollagama', '60640', 'cashOnDelvery', 196000, 'Shipped'),
+(89, 19, '2024-06-05', 'Lakshan Ekanayake', '0713755822', '413/1', 'Polpithigama', 'Kurunegala', '60640', 'Online', 442000, 'Processing..');
 
 -- --------------------------------------------------------
 
@@ -126,7 +142,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `firstName`, `lastName`, `mobile`, `addressLine1`, `addressLine2`, `addressLine3`, `isAdmin`) VALUES
-(1, 'admin@gmail.com', '1234', 'Admin ', 'Admin', '0701234455', 'xxxxxxxxxxxxxx', 'xxxxxxxxxxxxxx', 'xxxxxxxxxxxxxx', 'Yes');
+(19, 'lakshanekanayaka2000@gmail.com', '$2y$10$NZGiyOpf5kYkISVx0Dba5eeR2EIdvKLM9DuQ/NjsO6X3aar7iatVi', 'Lakshan', 'Ekanayake', '', '', '', '', 'No'),
+(20, 'admin2@gmail.com', '$2y$10$NMLGJvCgBzunIqNZABjYM..iTYw8kGKsjBoHp3lruv9Nir/3Sfz7i', 'admin', '2', '0701674282', '', '', '', 'Yes');
 
 -- --------------------------------------------------------
 
@@ -197,25 +214,25 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderId` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `orderId` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productId` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `productId` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Constraints for dumped tables
